@@ -3,7 +3,7 @@
                            -s:dest apk
                            -n:versionNam
                            -c:versionCode
--                
+            
          python build.py --channel -s dest.apk -c china,us
                            -s:dest.apk
                            -c:channellist
