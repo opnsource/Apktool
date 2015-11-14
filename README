@@ -1,13 +1,10 @@
-#通过ChannelTo91MM.py可以将深研MM转换成91MM
-#python MMTo91MM.py  -s android.apk -c 10  -n 3.0.3
-#-s表示apk源
-#-c表示versionCode
-#-n表示versionName
-#三个参数缺一不可
+
+python build.py --recompile -s dest.apk -n 1.0.1 -c 1000
+                -s:dest apk
+                -n:versionNam
+                -c:versionCode
 
 
-#通过ChannelTo91MM.py可以反编译打渠道包
-#python ChannelTo91MM.py -s android.apk -c IN,EN,AR
-#-s表示apk源
-#-c表示渠道号，多个用,隔开
-#两个参数缺一不可
+ python build.py --channel -s dest.apk -c china,us
+                 -s:dest.apk
+                 -c:channellist

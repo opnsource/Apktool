@@ -68,7 +68,6 @@ def ____recompile(opts):
     if len(versionCode) == 0 or len(versionName) == 0:
         ApkTool.modify(source[0:len(source) - 4])
     else:
-        print versionCode + versionName
         ApkTool.modify(source[0:len(source) - 4], None, versionCode, versionName)
     ApkTool.compile(source[0:len(source) - 4], "recompile")
     ApkTool.clean(source[0:len(source) - 4])

@@ -26,7 +26,7 @@ def compile(compile_file, channel):
     command = "%s b %s " % (____usePlatformApktool(), compile_file)
     os.system(command);
     ____signature(compile_file)
-    ____alignzip(compile_file, channel)
+    # ____alignzip(compile_file, channel)
     return
 
 
@@ -38,7 +38,7 @@ def clean(compile_file):
 
 
 def ____alignzip(complie_file, channel):
-    destApk = complie_file + "_" + channel + "_algign.apk";
+    destApk = complie_file + "_" + channel + "_align.apk";
     if (os.path.exists(destApk)):
         os.remove(destApk)
     command = " zipalign -v 4 %s %s " % (tempApk, destApk)
@@ -53,7 +53,7 @@ def ____signature(complie_file):
     keystorePass = cf.get("config", "key.store.password")
     alias = cf.get("config", "key.alias")
     aliasPass = cf.get("config""", "key.alias.password")
-    sysComand = "jarsigner -verbose -keystore  %s -storepass %s " \
+    sysComand = "jarsigner -digestalg SHA1 -sigalg MD5withRSA -verbose -keystore  %s -storepass %s " \
                 " -keypass %s -signedjar %s  %s/dist/%s.apk %s " % (
                     keystore, keystorePass, aliasPass, tempApk, complie_file, complie_file, alias)
     os.system(sysComand)
