@@ -8,3 +8,4 @@
                            -s:dest.apk
                            -c:channellist
       
+         在build.conf中配置相关数据
