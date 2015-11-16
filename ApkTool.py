@@ -26,7 +26,7 @@ def compile(compile_file, channel):
     command = "%s b %s " % (____usePlatformApktool(), compile_file)
     os.system(command);
     ____signature(compile_file)
-    # ____alignzip(compile_file, channel)
+    ____alignzip(compile_file, channel)
     return
 
 
