@@ -1,14 +1,15 @@
 # coding:UTF-8
 import ConfigParser
 import os
-import platform
 import re
 import shutil
+import subprocess
 from xml.etree.ElementTree import parse, register_namespace
+
+import RezipApk
 
 tempApk = "signed.apk"
 zipApk = "zip."
-
 androidName = "{http://schemas.android.com/apk/res/android}name"
 
 
@@ -17,17 +18,22 @@ def __init__():
 
 
 def decompile(decompile_fileApk):
-    command = "%s d -f %s " % (____usePlatformApktool(), decompile_fileApk)
-    os.system(command)
+    command = "java  -jar  apktool.jar d -f %s " % decompile_fileApk
+    subprocess.check_call(command, shell=True)
     return
 
 
 def compile(compile_file, channel):
-    command = "%s b %s " % (____usePlatformApktool(), compile_file)
-    os.system(command);
+    command = "java -jar  apktool.jar b %s " % compile_file
+    subprocess.check_call(command, shell=True)
     ____signature(compile_file)
-    ____alignzip(compile_file, channel)
+    souceApk = ____alignzip(compile_file, channel)
+    ____reZip(souceApk, compile_file + "_91MM_" + channel + ".apk")
     return
+
+
+def ____reZip(sourceApk, destApk):
+    RezipApk.rezip(sourceApk, destApk)
 
 
 def clean(compile_file):
@@ -42,8 +48,8 @@ def ____alignzip(complie_file, channel):
     if (os.path.exists(destApk)):
         os.remove(destApk)
     command = " zipalign -v 4 %s %s " % (tempApk, destApk)
-    os.system(command)
-    return
+    subprocess.check_call(command,shell=True)
+    return destApk
 
 
 def ____signature(complie_file):
@@ -56,21 +62,8 @@ def ____signature(complie_file):
     sysComand = "jarsigner -digestalg SHA1 -sigalg MD5withRSA -verbose -keystore  %s -storepass %s " \
                 " -keypass %s -signedjar %s  %s/dist/%s.apk %s " % (
                     keystore, keystorePass, aliasPass, tempApk, complie_file, complie_file, alias)
-    os.system(sysComand)
+    subprocess.check_call(sysComand,shell=True)
     return
-
-
-'''获取平台apktool'''
-
-
-def ____usePlatformApktool():
-    sysstr = platform.system()
-    if (sysstr == "Linux"):
-        return "./apktool.sh"
-    elif (sysstr == "Windows"):
-        return "apktool"
-    else:
-        return "./apktool.sh"
 
 
 '''修改包名'''
@@ -201,8 +194,8 @@ def ____modifyVersion(complie_file, versionCode, versionName):
 
 def installFrameworkRes():
     if (os.path.exists("framework-res.apk")):
-        command = "%s if framework-res.apk" % ____usePlatformApktool()
-        os.system(command)
+        command = "java -jar apktool.jar if framework-res.apk"
+        subprocess.call(command, shell=True)
 
 
 def ____modifyChannel(complie_file, channel):
@@ -210,7 +203,7 @@ def ____modifyChannel(complie_file, channel):
     cf.read("build.conf")
     channelFile = cf.get("modify", "app.channel")
     file = str(complie_file) + str(channelFile);
-    cFile = open(file, 'wb')
+    cFile = open(file, 'w')
     cFile.writelines(channel)
     cFile.flush()
     cFile.close()

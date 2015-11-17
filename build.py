@@ -46,7 +46,8 @@ def ____channel(opts):
     for channel in channelist:
         ApkTool.modify(source[0:len(source) - 4], channel)
         ApkTool.compile(source[0:len(source) - 4], channel)
-        ApkTool.clean(source[0:len(source) - 4])
+
+    ApkTool.clean(source[0:len(source) - 4])
     return
 
 
@@ -71,7 +72,6 @@ def ____recompile(opts):
         ApkTool.modify(source[0:len(source) - 4], None, versionCode, versionName)
     ApkTool.compile(source[0:len(source) - 4], "recompile")
     ApkTool.clean(source[0:len(source) - 4])
-
     return
 
 
