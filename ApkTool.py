@@ -28,7 +28,9 @@ def compile(compile_file, channel):
     subprocess.check_call(command, shell=True)
     ____signature(compile_file)
     souceApk = ____alignzip(compile_file, channel)
-    ____reZip(souceApk, compile_file + "_91MM_" + channel + ".apk")
+    ____reZip(souceApk, compile_file + "_channel_" + channel + ".apk")
+    if (os.path.exists(souceApk)):
+        os.remove(souceApk)
     return
 
 
@@ -48,7 +50,7 @@ def ____alignzip(complie_file, channel):
     if (os.path.exists(destApk)):
         os.remove(destApk)
     command = " zipalign -v 4 %s %s " % (tempApk, destApk)
-    subprocess.check_call(command,shell=True)
+    subprocess.check_call(command, shell=True)
     return destApk
 
 
@@ -62,7 +64,7 @@ def ____signature(complie_file):
     sysComand = "jarsigner -digestalg SHA1 -sigalg MD5withRSA -verbose -keystore  %s -storepass %s " \
                 " -keypass %s -signedjar %s  %s/dist/%s.apk %s " % (
                     keystore, keystorePass, aliasPass, tempApk, complie_file, complie_file, alias)
-    subprocess.check_call(sysComand,shell=True)
+    subprocess.check_call(sysComand, shell=True)
     return
 
 
