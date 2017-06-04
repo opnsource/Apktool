@@ -19,7 +19,7 @@ helpCommand = helpRecomplie + "\n" + helpChannel
 
 
 def ____getOpt(arg):
-    opts, args = getopt.getopt(arg, "hs:c:n:", ["recompile", "channel"])
+    opts, args = getopt.getopt(arg, "hs:c:n:", ["recompile", "channel","decompile","compile"])
     if not opts:
         ____help(helpCommand)
     firstParam = opts[0][0]
@@ -27,6 +27,10 @@ def ____getOpt(arg):
         ____recompile(opts)
     if "--channel" == firstParam:
         ____channel(opts)
+    if "--decompile" == firstParam:
+        ____decompile(opts)
+    if "--compile" == firstParam:
+        ____compile(opts)
     return
 
 
@@ -64,16 +68,42 @@ def ____recompile(opts):
             versionName = value
     if len(source) == 0:
         ____help(helpRecomplie)
-    ApkTool.installFrameworkRes()
-    ApkTool.decompile(source)
-    if len(versionCode) == 0 or len(versionName) == 0:
-        ApkTool.modify(source[0:len(source) - 4])
-    else:
-        ApkTool.modify(source[0:len(source) - 4], None, versionCode, versionName)
+    ApkTool.shellDecompile(source,versionCode,versionName)
     ApkTool.compile(source[0:len(source) - 4], "recompile")
     ApkTool.clean(source[0:len(source) - 4])
     return
 
+def ____decompile(opts):
+    source = ""
+    versionCode = ""
+    versionName = ""
+    for op, value in opts:
+        if op == "-s":
+            source = value
+        elif op == "-c":
+            versionCode = value
+        elif op == "-n":
+            versionName = value
+    if len(source) == 0:
+        ____help(helpRecomplie)
+    ApkTool.shellDecompile(source,versionCode,versionName)
+    return
+
+def ____compile(opts):
+    source = ""
+    versionCode = ""
+    versionName = ""
+    for op, value in opts:
+        if op == "-s":
+            source = value
+        elif op == "-c":
+            versionCode = value
+        elif op == "-n":
+            versionName = value
+    if len(source) == 0:
+        ____help(helpRecomplie)
+    ApkTool.compile(source,"recompile")
+    return
 
 def ____help(content):
     print content

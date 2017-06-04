@@ -227,3 +227,14 @@ def ____replaceAndroidName(packageName, value):
     if (value.startswith(".")):
         value = packageName + value
     return value
+
+
+def shellDecompile(source,versionCode=None,versionName=None):
+    installFrameworkRes()
+    decompile(source)
+    versionCode = str(versionCode)
+    versionName = str(versionName)
+    if len(versionCode) == 0 or len(versionName) == 0:
+        modify(source[0:len(source) - 4])
+    else:
+        modify(source[0:len(source) - 4], None, versionCode, versionName)
