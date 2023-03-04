@@ -19,7 +19,7 @@ helpCommand = helpRecomplie + "\n" + helpChannel
 
 
 def ____getOpt(arg):
-    opts, args = getopt.getopt(arg, "hs:c:n:", ["recompile", "channel","decompile","compile"])
+    opts, args = getopt.getopt(arg, "hs:c:n:", ["recompile", "channel", "decompile", "compile"])
     if not opts:
         ____help(helpCommand)
     firstParam = opts[0][0]
@@ -68,10 +68,11 @@ def ____recompile(opts):
             versionName = value
     if len(source) == 0:
         ____help(helpRecomplie)
-    ApkTool.shellDecompile(source,versionCode,versionName)
+    ApkTool.shellDecompile(source, versionCode, versionName)
     ApkTool.compile(source[0:len(source) - 4], "recompile")
     ApkTool.clean(source[0:len(source) - 4])
     return
+
 
 def ____decompile(opts):
     source = ""
@@ -86,8 +87,9 @@ def ____decompile(opts):
             versionName = value
     if len(source) == 0:
         ____help(helpRecomplie)
-    ApkTool.shellDecompile(source,versionCode,versionName)
+    ApkTool.shellDecompile(source, versionCode, versionName)
     return
+
 
 def ____compile(opts):
     source = ""
@@ -102,11 +104,12 @@ def ____compile(opts):
             versionName = value
     if len(source) == 0:
         ____help(helpRecomplie)
-    ApkTool.compile(source,"recompile")
+    ApkTool.compile(source, "recompile")
     return
 
+
 def ____help(content):
-    print content
+    print(content)
     exit(0)
 
 

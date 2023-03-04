@@ -12,24 +12,24 @@ import shutil
 # -
 def _____unzipApkFile(apkFilePath, unzipPath):
     if not os.path.exists(unzipPath):
-        os.makedirs(unzipPath, 0777)
+        os.makedirs(unzipPath, 0x777)
     zf = zipfile.ZipFile(apkFilePath)
 
     for name in zf.namelist():
         # print name
         if name.endswith(os.sep):
-            os.makedirs(os.path.join(unzipPath, name), 0777)
+            os.makedirs(os.path.join(unzipPath, name), 0x777)
         else:
             ext_filename = os.path.join(unzipPath, name)
             ext_dir = os.path.dirname(ext_filename)
             if not os.path.exists(ext_dir):
-                os.makedirs(ext_dir, 0777)
+                os.makedirs(ext_dir, 0x777)
             outfile = open(ext_filename, 'wb')
             outfile.write(zf.read(name))
             outfile.close()
     zf.close()
 
-    print "--unzipApkFile %s to %s finish." % (apkFilePath, unzipPath)
+    print ("--unzipApkFile %s to %s finish." % (apkFilePath, unzipPath))
 
 
 # -
@@ -51,7 +51,7 @@ def _____zipApkFile(unzipPath, apkFilePath):
         zf.write(name, arcname)
     zf.close()
 
-    print "--zipApkFile %s to %s finish." % (unzipPath, apkFilePath)
+    print ("--zipApkFile %s to %s finish." % (unzipPath, apkFilePath))
 
 
 # -
@@ -60,9 +60,9 @@ def _____zipApkFile(unzipPath, apkFilePath):
 def _____zipalignApkFile(signedApkPath, alignedApkPath):
     alignCmd = "zipalign -f 4 %s %s" % (signedApkPath, alignedApkPath)
     # print alignCmd
-    print "--zipalignApkFile %s..." % signedApkPath
+    print ("--zipalignApkFile %s..." % signedApkPath)
     subprocess.check_call(alignCmd, shell=True)
-    print "--zipalignApkFile %s finish." % signedApkPath
+    print ("--zipalignApkFile %s finish." % signedApkPath)
 
 
 def rezip(sourceApk, rezipApk):
@@ -84,5 +84,5 @@ def rezip(sourceApk, rezipApk):
         shutil.rmtree(unzipTempDir)
     if os.path.exists(rezipTempApk):
         os.remove(rezipTempApk)
-    print "Finish reziping [%s] to [%s]." % (sourceApk, rezipApk)
-    print "\nreziping package successfully!"
+    print("Finish reziping [%s] to [%s]." % (sourceApk, rezipApk))
+    print ("\nreziping package successfully!")

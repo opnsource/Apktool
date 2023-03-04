@@ -1,9 +1,9 @@
 # coding:UTF-8
-import ConfigParser
 import os
 import re
 import shutil
 import subprocess
+from configparser import ConfigParser
 from xml.etree.ElementTree import parse, register_namespace
 
 import RezipApk
@@ -18,7 +18,7 @@ def __init__():
 
 
 def decompile(decompile_fileApk):
-    command = "java  -jar  apktool.jar d -f %s " % decompile_fileApk
+    command = "java  -jar  apktool.jar d -f %s --only-main-classes" % decompile_fileApk
     subprocess.check_call(command, shell=True)
     return
 
@@ -55,7 +55,7 @@ def ____alignzip(complie_file, channel):
 
 
 def ____signature(complie_file):
-    cf = ConfigParser.ConfigParser()
+    cf = ConfigParser()
     cf.read("build.conf")
     keystore = cf.get("config", "key.store")
     keystorePass = cf.get("config", "key.store.password")
@@ -72,17 +72,17 @@ def ____signature(complie_file):
 
 
 def ____modifyManifest(complie_file):
-    cf = ConfigParser.ConfigParser()
+    cf = ConfigParser()
     cf.read("build.conf")
     packageName = cf.get("modify", "app.package")
     modifyName = cf.get("modify", "modify.package")
     out = complie_file + "/AndroidManifest.xml"
-    manifest = open(out, 'r')
+    manifest = open(out, 'r', encoding='utf-8')
     tmp = complie_file + "/AndroidManifest1.xml"
     if (os.path.exists(tmp)):
         os.remove(tmp)
     content = ""
-    manifestNew = open(tmp, 'wb')
+    manifestNew = open(tmp, 'w', encoding='utf-8')
     while True:
         line = manifest.readline()
         if (len(line) == 0):
@@ -91,7 +91,7 @@ def ____modifyManifest(complie_file):
     findStr = "package=\"%s\"" % (packageName)
     replaceStr = "package=\"%s\"" % (modifyName)
     content = re.sub(findStr, replaceStr, content)
-    manifestNew.writelines(content)
+    manifestNew.write(content)
     manifestNew.flush()
     manifestNew.close()
     manifest.close()
@@ -131,10 +131,10 @@ def ____updateFramework(framework_list, packageName):
 
 
 def ____modifyLayout(compile_file):
-    cf = ConfigParser.ConfigParser()
+    cf = ConfigParser()
     cf.read("build.conf")
     packageName = cf.get("modify", "app.package")
-    resFile = compile_file + "/res";
+    resFile = compile_file + "/res"
     files = os.listdir(resFile)
     for file in files:
         if os.path.isdir(os.path.join(resFile, file)):
@@ -148,21 +148,21 @@ def ____modifyLayoutInner(packageName, rootFile):
         return
     files = os.listdir(rootFile)
     for file in files:
-        file = os.path.join(rootFile, file);
+        file = os.path.join(rootFile, file)
         if not os.path.isfile(file):
             continue
-        input = open(file, 'r')
+        input = open(file, 'r', encoding='utf-8')
         lines = ""
         while True:
             line = input.readline()
             if len(line) == 0:
-                break;
+                break
             lines += line
         pattern = "http://schemas.android.com/apk/res/" + packageName
         replace = "http://schemas.android.com/apk/res-auto"
         lines = re.sub(pattern, replace, lines)
         input.close()
-        out = open(file, 'w')
+        out = open(file, 'w',encoding='utf-8')
         out.writelines(lines)
         out.flush()
         out.close()
@@ -171,20 +171,21 @@ def ____modifyLayoutInner(packageName, rootFile):
 
 def ____modifyVersion(complie_file, versionCode, versionName):
     out = complie_file + "/apktool.yml"
-    files = open(out, 'r')
+    files = open(out, 'r', encoding='utf-8')
     tmp = complie_file + "/apktool1.yml"
     if (os.path.exists(tmp)):
         os.remove(tmp)
-    output = open(tmp, 'wb')
-    lines = "";
+    output = open(tmp, 'w', encoding='utf-8')
+    lines = ''
     while True:
         line = files.readline()
         if (len(line) == 0):
-            break;
+            break
         lines += line
     lines = re.sub("versionCode:[\d\S'\. ]*", "versionCode:  %s" % (versionCode), lines)
     lines = re.sub("versionName:[\d\S'\. ]*", "versionName:  %s" % (versionName), lines)
-    output.writelines(lines)
+    # print("lines",lines)
+    output.write(lines)
     output.flush()
     output.close()
     files.close()
@@ -201,7 +202,7 @@ def installFrameworkRes():
 
 
 def ____modifyChannel(complie_file, channel):
-    cf = ConfigParser.ConfigParser()
+    cf = ConfigParser()
     cf.read("build.conf")
     channelFile = cf.get("modify", "app.channel")
     file = str(complie_file) + str(channelFile);
@@ -229,7 +230,7 @@ def ____replaceAndroidName(packageName, value):
     return value
 
 
-def shellDecompile(source,versionCode=None,versionName=None):
+def shellDecompile(source, versionCode=None, versionName=None):
     installFrameworkRes()
     decompile(source)
     versionCode = str(versionCode)
