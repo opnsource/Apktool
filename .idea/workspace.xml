@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3e02237-5f16-48c2-a4a0-13ec8cf8b06e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/apksigner.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jyyz.jks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.conf" beforeDir="false" afterPath="$PROJECT_DIR$/build.conf" afterDir="false" />
     </list>
@@ -338,7 +336,7 @@
       <updated>1445959499551</updated>
       <workItem from="1670395286545" duration="5891000" />
       <workItem from="1670404979775" duration="3152000" />
-      <workItem from="1677935135324" duration="13213000" />
+      <workItem from="1677935135324" duration="13482000" />
     </task>
     <servers />
   </component>
