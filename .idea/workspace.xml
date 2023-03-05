@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3e02237-5f16-48c2-a4a0-13ec8cf8b06e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/xshypmds.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apksigner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jyyz.jks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApkTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/ApkTool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ApktoolPy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ApktoolPy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RezipApk.py" beforeDir="false" afterPath="$PROJECT_DIR$/RezipApk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apktool.bat" beforeDir="false" afterPath="$PROJECT_DIR$/apktool.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apktool.jar" beforeDir="false" afterPath="$PROJECT_DIR$/apktool.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/build.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework-res.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.conf" beforeDir="false" afterPath="$PROJECT_DIR$/build.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +112,7 @@
       <recent name="F:\workspaces\ApktoolPy" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ApkTool">
+  <component name="RunManager" selected="Python.apksigner">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -273,6 +266,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="apksigner" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ApktoolPy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/apksigner.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="build" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ApktoolPy" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -296,12 +311,14 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.apksigner" />
       <item itemvalue="Python.ApkTool" />
       <item itemvalue="Python.Test" />
       <item itemvalue="Python.build" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.apksigner" />
         <item itemvalue="Python.ApkTool" />
         <item itemvalue="Python.build" />
         <item itemvalue="Python.Test" />
@@ -321,6 +338,7 @@
       <updated>1445959499551</updated>
       <workItem from="1670395286545" duration="5891000" />
       <workItem from="1670404979775" duration="3152000" />
+      <workItem from="1677935135324" duration="13213000" />
     </task>
     <servers />
   </component>
@@ -434,6 +452,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ApktoolPy$apksigner.coverage" NAME="apksigner Coverage Results" MODIFIED="1677982706281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ApktoolPy$ApkTool.coverage" NAME="ApkTool Coverage Results" MODIFIED="1670400808038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
